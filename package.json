@@ -1,0 +1,19 @@
+{
+  "name": "orion_automation_poc",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "test": "playwright test",
+    "allure:generate": "allure generate allure-results -o allure-report --clean",
+    "allure:serve": "allure serve allure-results"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "^26.6.4",
+    "allure-commandline": "2.46.1",
+    "allure-playwright": "3.13.0",
+    "pixelmatch": "^7.2.0",
+    "pngjs": "^7.0.0",
+    "typescript": "5.9.3"
+  }
+}

@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Secrets (ORION_USERNAME / ORION_PASSWORD) - never commit
+.env
+
+# Playwright / Allure output (reports can contain sensitive data)
+test-results/
+playwright-report/
+allure-results/
+allure-report/
+.playwright-mcp/
+
+# Logs
+*.log
+
+# .NET TestDataGenerator build output and restored packages
+dotnet/**/bin/
+dotnet/**/obj/
+dotnet/**/packages/
+
+# Generated test data (recreated by TestDataGenerator on each run)
+dotnet/TestDataGenerator/ScenarioData/*.json
+
+# Visual Studio / OS
+.vs/
+*.user
+.DS_Store
+Thumbs.db
