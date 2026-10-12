@@ -13,6 +13,7 @@ namespace TestDataGenerator
 		public string QAInitials;
 		public string Iteration;
 		public string TestPrefix;
+		public string ServicesServer;
 		public QuantumChoiceSetupController QCSetupController;
 
 		public void AddTestInfo(TestInformation testInfo)
@@ -29,6 +30,7 @@ namespace TestDataGenerator
 			}
 
 			TestPrefix = $"{testInfo.TestCaseIdentifier}{QAInitials}{Iteration}COMP";
+			ServicesServer = testInfo.GetParameter("auServicesServer")?.Value;
 
 			// Set Test setup controllers
 			var QCDatabase = new Database

@@ -6,7 +6,10 @@
       "args": [
         "./node_modules/playwright/cli.js",
         "run-test-mcp-server"
-      ]
+      ],
+      "env": {
+        "PW_INCLUDE_SEED": "1"
+      }
     }
   },
   "inputs": []

@@ -44,25 +44,45 @@
     <Reference Include="Automation.Orion.DataEntry.SQL.WorkerPortal">
       <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\OrionWorkerPortal\DataEntry\SQL\2025.2.1\Automation.Orion.DataEntry.SQL.WorkerPortal.dll</HintPath>
     </Reference>
+    <Reference Include="Automation.Orion.WorkerPortal.EntityFramework">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\OrionWorkerPortal\DataEntry\SQL\2025.2.1\Automation.Orion.WorkerPortal.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Automation.QC.DataEntry.Setups">
-      <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\QC\DataEntry\Setups\2025.2000.1\Automation.QC.DataEntry.Setups.dll</HintPath>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Automation.QC.DataEntry.Setups.dll</HintPath>
     </Reference>
     <Reference Include="Automation.QC.DataEntry.SQL.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\QC\DataEntry\SQL\Core\2025.2000.1\Automation.QC.DataEntry.SQL.Core.dll</HintPath>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Automation.QC.DataEntry.SQL.Core.dll</HintPath>
     </Reference>
     <Reference Include="Automation.QC.DataEntry.SQL.Hist">
       <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\HIST\DataEntry\SQL\5.0.0.0\Automation.QC.DataEntry.SQL.Hist.dll</HintPath>
     </Reference>
     <Reference Include="Automation.QC.EntityFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\QC\DataEntry\SQL\Core\2025.2000.1\Automation.QC.EntityFramework.dll</HintPath>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Automation.QC.EntityFramework.dll</HintPath>
+    </Reference>
+        <Reference Include="Plexis.Messages.Accounting">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Plexis.Messages.Accounting.dll</HintPath>
+    </Reference>
+    <Reference Include="Plexis.Messages.ClaimAdjudication">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Plexis.Messages.ClaimAdjudication.dll</HintPath>
+    </Reference>
+    <Reference Include="Plexis.QC.ClaimAdjudicationApi">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Plexis.QC.ClaimAdjudicationApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Plexis.QC.Core.JobManager">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Plexis.QC.Core.JobManager.dll</HintPath>
     </Reference>
     <Reference Include="Automation.QC.Processing">
-      <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\QC\Processing\2025.2000.1\Automation.QC.Processing.dll</HintPath>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Automation.QC.Processing.dll</HintPath>
     </Reference>
     <Reference Include="Automation.QC.Validation.SQL">
-      <HintPath>..\..\..\..\AutoCommonFiles\Support\Libraries\Automation\QC\Validation\SQL\2025.2000.1\Automation.QC.Validation.SQL.dll</HintPath>
+      <HintPath>..\..\..\..\ORION_Automation\Visual Studio\QC_Orion_Playwright_UI\QC_Orion_Playwright_UI\References\Automation.QC.Validation.SQL.dll</HintPath>
     </Reference>
     <Reference Include="Automation.TestRunner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -178,14 +198,25 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setups\SetupTemplate.cs" />
-    <Compile Include="Setups\TC001.cs" />
+    <Compile Include="Setups\TC6286.cs" />
+    <Compile Include="Setups\TC6287.cs" />
+    <Compile Include="Setups\TC6288.cs" />
+    <Compile Include="Setups\TC6289.cs" />
+    <Compile Include="Setups\TC6290.cs" />
+    <Compile Include="Setups\TC6291.cs" />
+    <Compile Include="Setups\TC6292.cs" />
+    <Compile Include="Setups\TC6295.cs" />
+    <Compile Include="Setups\TC6296.cs" />
+    <Compile Include="Setups\TC6297.cs" />
     <Compile Include="Support\Controllers.cs" />
     <Compile Include="Support\LoggerContext.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Support\PowerShellRunner.cs" />
     <Compile Include="Support\QCTestSetup.cs" />
     <Compile Include="Support\QCTestSetupFactory.cs" />
     <Compile Include="Support\TestScenarioHelpers.cs" />
+    <Compile Include="Support\WorkerPortalLookups.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
