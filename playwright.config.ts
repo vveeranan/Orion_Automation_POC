@@ -11,6 +11,7 @@ export default defineConfig({
   workers: 1,
 
   reporter: [
+    ['./utils/mtmReporter.ts'],
     ['allure-playwright', { outputFolder: 'allure-results' }],
   ],
 
