@@ -11,26 +11,6 @@ Claude Code – AI-assisted test creation, debugging, and automation
 Visual Studio Code – Development environment
 Node.js & npm – JavaScript runtime and package management
 Git & GitHub – Version control and repository management
-✨ Features
-Automated end-to-end browser testing
-AI-assisted test generation using Claude Code
-Automated UI interaction and validation
-Test execution across supported browsers
-Reusable and maintainable test scripts
-Test debugging and troubleshooting
-Integration with Git for version control
-📂 Project Structure
-project/
-├── tests/                 # Playwright test cases
-├── playwright-report/     # HTML test reports (generated)
-├── test-results/          # Test execution results
-├── playwright.config.ts   # Playwright configuration
-├── package.json           # Project dependencies and scripts
-├── package-lock.json      # Dependency lock file
-└── README.md              # Project documentation
-
-
-Note: The folder structure may vary depending on your project configuration.
 
 🚀 Getting Started
 Prerequisites
