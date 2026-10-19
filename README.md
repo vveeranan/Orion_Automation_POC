@@ -157,6 +157,70 @@ Generate and view the report using:
 npx playwright test
 npx playwright show-report
 
+## 📂 Project Structure
+
+This project automates end-to-end tests of the **Orion** web application. Each test needs data to exist in Orion first (a member, a queue, a group, and so on). A .NET tool creates that data, then Playwright drives the browser using it.
+
+```
+Orion_Automation_POC/
+├── tests/                  # The Playwright test cases (what actually runs)
+├── fixtures/               # Playwright fixture that supplies test data to each test
+├── utils/                  # Reusable helper functions and flows (login, create ticket, ...)
+├── types/                  # TypeScript type definitions for the test data
+├── dotnet/
+│   └── TestDataGenerator/  # C# console app that creates test data in Orion
+│       ├── Setups/         # One setup class per test case (TC<id>.cs)
+│       └── Support/        # Shared helpers used by the setups
+├── TestSteps/              # Plain-English description of every test case (TC<id>.md)
+├── specs/                  # Test plans written in Markdown (used by the Playwright planner agent)
+├── playwright.config.ts    # Playwright settings (browser, reporters, base URL)
+├── package.json            # npm dependencies and scripts
+├── .env.example            # Template for the credentials file (.env)
+├── .mcp.json               # Playwright MCP server config for Claude Code
+└── MTM_Update.txt          # Generated after each run: pass/fail list for Microsoft Test Manager
+```
+
+### Folder details
+
+| Folder / File | Purpose |
+| --- | --- |
+| `tests/` | Test files named `*.spec.ts`. `RT25957.spec.ts` and `RT27053.spec.ts` hold the regression tests for those work items, `Smoke.spec.ts` is a smoke test, and `seed.spec.ts` is only a login seed used by the Claude/Playwright planner and generator agents (it is skipped in normal runs). Test titles start with the test case id, for example `TC16966 ...`. That id links the test to its data setup and its results. |
+| `fixtures/` | `testData.fixture.ts` extends Playwright's `test`. Before each test it takes the test case id from the title, runs the C# generator and hands the resulting data to the test as `testData`. It also writes a log file for every test. Tests import `test` and `expect` from here instead of from `@playwright/test`. |
+| `utils/` | Helpers shared by the tests. Reusable flows: `auth.ts` (log in), `memberCall.ts` and `providerCall.ts` (create tickets), `reloadQueues.ts`, `tickets.ts`, `grid.ts`, `kpi.ts`. Plumbing: `credentials.ts` (reads `.env`), `csharpRunner.ts` (runs the C# generator and reads its JSON output), `buildTestDataGenerator.ts` (builds the C# project), `incrementIteration.ts` (global setup), `logger.ts` (per-test logs), `mtmReporter.ts` (writes `MTM_Update.txt`). See [utils/README.md](utils/README.md) for the list of flows. |
+| `types/` | `testData.ts` describes the shape of the data the generator produces. |
+| `dotnet/TestDataGenerator/` | .NET Framework console app. It receives a test case id, runs the matching class in `Setups/` to create the data in Orion, and writes `ScenarioData/<id>Data.json` for the test to read. `Program.cs` is the entry point, `Setups/SetupTemplate.cs` is the template for a new setup, and `Support/` holds shared helpers. |
+| `TestSteps/` | One Markdown file per test case with its name, categories, the data the setup creates, and the numbered steps and checks. Read these first to learn what a test does. |
+| `specs/` | Markdown test plans (for example `Smoke.md`) used to generate new tests with Claude Code and Playwright. |
+
+### How a test run flows
+
+```
+npx playwright test
+   │
+   ├─ 1. Global setup builds the C# TestDataGenerator and bumps the run iteration
+   ├─ 2. For each test (e.g. "TC16966 ...") the testData fixture runs
+   │       TestDataGenerator.exe TC16966  →  creates data in Orion
+   │                                      →  writes ScenarioData/TC16966Data.json
+   ├─ 3. The test logs in to Orion, uses the data and checks the results
+   └─ 4. Reports are written: Allure results, per-test logs and MTM_Update.txt
+```
+
+### Generated folders (not committed)
+
+These are created when you run the tests and are listed in `.gitignore`: `node_modules/`, `test-results/`, `playwright-report/`, `allure-results/`, `allure-report/`, `dotnet/**/bin`, `dotnet/**/obj`, `dotnet/TestDataGenerator/ScenarioData/*.json` and `*.log`.
+
+### Adding a new test
+
+1. Describe it in `TestSteps/TC<id>.md`.
+2. Copy `dotnet/TestDataGenerator/Setups/SetupTemplate.cs` to `TC<id>.cs` and set up the data it needs.
+3. Add a test whose title starts with `TC<id>` in `tests/`, import `test` from `fixtures/testData.fixture.ts` and reuse the helpers in `utils/`.
+
+### Configuration
+
+- Copy `.env.example` to `.env` and fill in the Orion credentials. Never commit `.env`.
+- Visual Studio 2022 (MSBuild) is needed to build the C# generator. Set `MSBUILD_PATH` if it is installed somewhere else.
+- Run `npm run allure:generate` or `npm run allure:serve` to view the Allure report.
+
 👤 Author
 
 Vidhya Veeranan
