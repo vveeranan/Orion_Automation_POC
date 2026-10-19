@@ -7,9 +7,10 @@ import { log } from './logger';
  * Logs in to Orion with ORION_USERNAME / ORION_PASSWORD (via getCredentials()) and returns the username
  * so the test can assert on 'Created By' style columns or assign things to the logged in user.
  * Never log the password.
+ * Pass credentials to log in as another user (e.g. getNoKpiAccessCredentials()); the default is the main automation user.
  */
-export async function login(page: Page): Promise<string> {
-  const { username, password } = getCredentials();
+export async function login(page: Page, credentials: { username: string; password: string } = getCredentials()): Promise<string> {
+  const { username, password } = credentials;
 
   log('Performing complete login flow');
   log('Navigating to the login page');

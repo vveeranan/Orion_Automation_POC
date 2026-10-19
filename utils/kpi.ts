@@ -505,3 +505,76 @@ export async function setKpiRefreshInterval(page: Page, interval: '20 sec' | '60
   await expect(dialog).toBeHidden();
 }
 
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Group KPIs list: acknowledgement, order, access (RT-25957)
+// ---------------------------------------------------------------------------------------------------------------------
+
+/**
+ * Clicks Disable on a KPI, acknowledges the confirmation the user must give for it (a browser dialog or an in-page
+ * dialog with a Yes/OK/Confirm/Proceed/Disable button) and waits for the save.
+ * @returns true when a confirmation was shown and acknowledged, false when the KPI was disabled without one
+ */
+export async function disableKpiAcknowledging(page: Page, kpiName: string): Promise<boolean> {
+  log(`Disabling KPI ${kpiName} and acknowledging the confirmation`);
+  let acknowledged = false;
+  const onBrowserDialog = (dialog: { accept: () => Promise<void> }) => {
+    acknowledged = true;
+    void dialog.accept();
+  };
+  page.on('dialog', onBrowserDialog);
+  try {
+    const saved = configurationSaved(page, kpiName, '', undefined, 30000);
+    saved.catch(() => undefined);
+    await clickInKpiList(kpiItem(page, kpiName).getByRole('button', { name: 'Disable' }));
+    const confirm = page.getByRole('dialog').getByRole('button', { name: /^(yes|ok|confirm|proceed|disable)$/i });
+    if (await confirm.first().waitFor({ state: 'visible', timeout: 5000 }).then(() => true, () => false)) {
+      acknowledged = true;
+      await confirm.first().click();
+    }
+    await saved;
+  } finally {
+    page.off('dialog', onBrowserDialog);
+  }
+  await expect(kpiItem(page, kpiName).getByRole('button', { name: 'Enable' })).toBeVisible();
+  return acknowledged;
+}
+
+/**
+ * The KPI names the Group KPIs tab lists under each category heading, in the order shown (read from the page, not
+ * sorted). Only the names in allNames are picked up from a row, so the Enable/Disable button text is not part of a name.
+ */
+export async function readKpiListOrder(page: Page): Promise<Record<string, string[]>> {
+  return page.evaluate(
+    ({ categories, allNames }) => {
+      const result: Record<string, string[]> = {};
+      let current: string | undefined;
+      for (const el of document.querySelectorAll('h1, h2, h3, h4, h5, h6, .kpi-item')) {
+        if (!el.classList.contains('kpi-item')) {
+          const text = (el.textContent ?? '').trim().toLowerCase();
+          current = categories.find(c => c.toLowerCase() === text);
+          if (current) {
+            result[current] = [];
+          }
+          continue;
+        }
+        const leaf = [...el.querySelectorAll('*')].find(
+          n => n.children.length === 0 && allNames.includes((n.textContent ?? '').trim())
+        );
+        if (current && leaf) {
+          result[current].push((leaf.textContent ?? '').trim());
+        }
+      }
+      return result;
+    },
+    { categories: ['Claims Processing KPIs', 'Customer Service KPIs'], allNames: [...CLAIMS_PROCESSING_KPIS, ...CUSTOMER_SERVICE_KPIS] }
+  );
+}
+
+/** True when a control is not offered to the user: it is not in the page at all, or it is shown but disabled. */
+export async function isUnavailable(control: Locator): Promise<boolean> {
+  if ((await control.count()) === 0) {
+    return true;
+  }
+  return control.first().isDisabled();
+}

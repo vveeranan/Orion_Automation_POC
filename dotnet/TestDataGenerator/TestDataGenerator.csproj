@@ -233,6 +233,23 @@
     <Compile Include="Setups\TC16988.cs" />
     <Compile Include="Setups\TC16989.cs" />
     <Compile Include="Setups\TC16990.cs" />
+    <Compile Include="Setups\TC17081.cs" />
+    <Compile Include="Setups\TC17082.cs" />
+    <Compile Include="Setups\TC17083.cs" />
+    <Compile Include="Setups\TC17084.cs" />
+    <Compile Include="Setups\TC17085.cs" />
+    <Compile Include="Setups\TC17086.cs" />
+    <Compile Include="Setups\TC17087.cs" />
+    <Compile Include="Setups\TC17088.cs" />
+    <Compile Include="Setups\TC17089.cs" />
+    <Compile Include="Setups\TC17090.cs" />
+    <Compile Include="Setups\TC17091.cs" />
+    <Compile Include="Setups\TC17093.cs" />
+    <Compile Include="Setups\TC17094.cs" />
+    <Compile Include="Setups\TC17095.cs" />
+    <Compile Include="Setups\TC17096.cs" />
+    <Compile Include="Setups\TC17097.cs" />
+    <Compile Include="Setups\TC17099.cs" />
     <Compile Include="Support\Controllers.cs" />
     <Compile Include="Support\LoggerContext.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
