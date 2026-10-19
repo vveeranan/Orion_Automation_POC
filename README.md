@@ -81,7 +81,7 @@ Debug failed test cases and suggest fixes.
 Improve test coverage for critical user workflows.
 Review existing automation scripts and suggest improvements.
 
-Prompt:
+Prompt 1:
 
 Act an automation tester. Create tests by following the instructions below:
 1. Make use of the dlls C:\AutoCommonFiles\Support\Libraries\Automation\QC\DataEntry\SQL\Core\2025.2000.1\Automation.QC.DataEntry.SQL.Core.dll, 
@@ -97,6 +97,44 @@ C:\AutoCommonFiles\Support\Libraries\Automation\OrionWorkerPortal\DataEntry\SQL\
     2. After reloading the queues, go to My Claims queue page, search for the created claim and select it., 
     3. Click tasks tab and add a task to the claim
     4. Go to My Tasks page and verify if the task is displayed
+  
+Prompt 2:
+
+Act an automation tester. Understand the requirement at Desktop\RT27053_Feature_Summary.docx  and create tests by following the instructions below:
+1. Make use of the dlls C:\AutoCommonFiles\Support\Libraries\Automation\QC\DataEntry\SQL\Core\2025.2000.1\Automation.QC.DataEntry.SQL.Core.dll, 
+C:\AutoCommonFiles\Support\Libraries\Automation\OrionWorkerPortal\DataEntry\SQL\2025.2.1\Automation.Orion.DataEntry.SQL.WorkerPortal.dll.
+2. First create setup under Setups folder by using the above dll methods for each test case as required
+3. Use RT27053.spec.ts to create all the tests
+4. Assign relavant categories for each test including regression
+5. Provide enough comments for the test steps 
+6. After generating the tests, record it under TestSteps for each file
+Here is the test case list: 
+
+16966	: TaskKPI_WhenAuthorizedUserOpensConfiguration_ShouldShowTaskKPIs, Release ORION 2025.2000.1
+16967	: TaskKPI_WhenUserSelectsTaskKPIs_ShouldShowTaskDefinitions, Release ORION 2025.2000.1
+16968	: TaskKPI_WhenUserEnablesTaskKPI_ShouldSaveConfiguration, Release ORION 2025.2000.1
+16969	: TaskKPI_WhenUserDisablesTaskKPI_ShouldHideFromMyTask, Release ORION 2025.2000.1
+16970	: TaskKPI_WhenConfigured_ShouldDisplayInMyTask, Release ORION 2025.2000.1
+16971	: TaskKPI_WhenAllTaskKPIsConfigured_ShouldDisplayEachTile, Release ORION 2025.2000.1
+16972	: TaskKPI_WhenLabelIsRendered_ShouldUseKPIsCapitalization, Release ORION 2025.2000.1
+16973	: TaskKPI_WhenNoTaskKPIIsEnabled_ShouldShowApprovedEmptyState, Release ORION 2025.2000.1
+16974	: TaskKPI_WhenNoDataIsReturned_ShouldShowApprovedNoDataState, Release ORION 2025.2000.1
+16975	: TaskKPI_WhenTasksCreatedDataExists_ShouldDisplayApprovedValue, Release ORION 2025.2000.1
+16976	: TaskKPI_WhenTasksResolvedDataExists_ShouldDisplayApprovedValue, Release ORION 2025.2000.1
+16977	: TaskKPI_WhenResolutionDataExists_ShouldDisplayApprovedValue, Release ORION 2025.2000.1
+16978	: TaskKPI_WhenCloseDataExists_ShouldDisplayApprovedValue, Release ORION 2025.2000.1
+16979	: TaskKPI_WhenTaskDataReachesBoundary_ShouldApplyApprovedCalculation, Release ORION 2025.2000.1
+16980	: TaskKPI_WhenBenchmarkIsMissing_ShouldApplyApprovedVisibility, Release ORION 2025.2000.1
+16981	: TaskKPI_WhenMeasurementPeriodIsMissing_ShouldApplyApprovedVisibility, Release ORION 2025.2000.1
+16982	: TaskKPI_WhenServiceFails_ShouldShowApprovedErrorState, Release ORION 2025.2000.1
+16983	: TaskKPI_WhenDataIsRefreshing_ShouldApplyApprovedRefreshBehavior, Release ORION 2025.2000.1
+16984	: TaskKPI_WhenUserOpensTile_ShouldShowApprovedKPIInformation, Release ORION 2025.2000.1
+16985	: TaskKPI_WhenUserLacksPermission_ShouldHideRestrictedResults, Release ORION 2025.2000.1
+16986	: TaskKPI_WhenClaimsQueueLoads_ShouldPreserveExistingKPIs, Release ORION 2025.2000.1
+16987	: TaskKPI_WhenTicketsLoads_ShouldPreserveExistingKPIs, Release ORION 2025.2000.1
+16988	: TaskKPI_WhenExistingKPIIsMisconfigured_ShouldHideItsTile, Release ORION 2025.2000.1
+16989	: TaskKPI_WhenExistingKPIUsesBenchmark_ShouldValidateBenchmarkValue, Release ORION 2025.2000.1
+16990	: TaskKPI_WhenExistingKPISettingsOpen_ShouldPreserveRefreshOptions, Release ORION 2025.2000.1
 
 Start Claude Code from the project directory using:
 
